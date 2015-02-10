@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBone.Core", "OBone.Core\OB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBone.Core.Data.Entity", "OBone.Core.Data.Entity\OBone.Core.Data.Entity.csproj", "{43327971-2996-4A4D-A2CC-F491B31F1493}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBone.API", "OBone.API\OBone.API.csproj", "{E637DBB3-9EB5-4555-9625-7039BCE49E12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{43327971-2996-4A4D-A2CC-F491B31F1493}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43327971-2996-4A4D-A2CC-F491B31F1493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43327971-2996-4A4D-A2CC-F491B31F1493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E637DBB3-9EB5-4555-9625-7039BCE49E12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E637DBB3-9EB5-4555-9625-7039BCE49E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E637DBB3-9EB5-4555-9625-7039BCE49E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E637DBB3-9EB5-4555-9625-7039BCE49E12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,5 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D0B47E3E-DA03-405D-B369-151459157693} = {1F89658D-36FA-444F-AFCC-FBE7611DE77A}
 		{43327971-2996-4A4D-A2CC-F491B31F1493} = {1F89658D-36FA-444F-AFCC-FBE7611DE77A}
+		{E637DBB3-9EB5-4555-9625-7039BCE49E12} = {2B257628-CB00-42A5-BA73-654C1A1B246A}
 	EndGlobalSection
 EndGlobal
