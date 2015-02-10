@@ -5,8 +5,32 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-展现层", "4-展现层", "{2B257628-CB00-42A5-BA73-654C1A1B246A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-基础设施", "1-基础设施", "{1F89658D-36FA-444F-AFCC-FBE7611DE77A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBone.Core", "OBone.Core\OBone.Core.csproj", "{D0B47E3E-DA03-405D-B369-151459157693}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBone.Core.Data.Entity", "OBone.Core.Data.Entity\OBone.Core.Data.Entity.csproj", "{43327971-2996-4A4D-A2CC-F491B31F1493}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0B47E3E-DA03-405D-B369-151459157693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0B47E3E-DA03-405D-B369-151459157693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0B47E3E-DA03-405D-B369-151459157693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0B47E3E-DA03-405D-B369-151459157693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43327971-2996-4A4D-A2CC-F491B31F1493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43327971-2996-4A4D-A2CC-F491B31F1493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43327971-2996-4A4D-A2CC-F491B31F1493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43327971-2996-4A4D-A2CC-F491B31F1493}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0B47E3E-DA03-405D-B369-151459157693} = {1F89658D-36FA-444F-AFCC-FBE7611DE77A}
+		{43327971-2996-4A4D-A2CC-F491B31F1493} = {1F89658D-36FA-444F-AFCC-FBE7611DE77A}
 	EndGlobalSection
 EndGlobal
