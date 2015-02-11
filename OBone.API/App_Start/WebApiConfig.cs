@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
+using Autofac;
+using Autofac.Integration.WebApi;
+
+using System.Reflection;
+
+using OBone.Core;
+using OBone.Core.Data.Entity;
+using OBone.Core.Data;
+
+using System.IO;
+using System.Web;
+
 namespace OBone.API
 {
     public static class WebApiConfig
@@ -19,6 +31,27 @@ namespace OBone.API
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            #region 依赖注入
+
+            var builder = new ContainerBuilder();
+            var baseType = typeof(IDependency);
+
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+
+            builder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>));
+
+            var assemblies = new DirectoryInfo(
+                    HttpContext.Current.Server.MapPath("~/bin/"))
+              .GetFiles("*.dll")
+              .Select(r => Assembly.LoadFrom(r.FullName)).ToArray();
+
+            builder.RegisterAssemblyTypes(assemblies)
+                   .Where(t => baseType.IsAssignableFrom(t) && t != baseType)
+                   .AsImplementedInterfaces().InstancePerLifetimeScope();
+
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(builder.Build());
+
+            #endregion
         }
     }
 }

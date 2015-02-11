@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D0B47E3E-DA03-405D-B369-151459157693}</ProjectGuid>
+    <ProjectGuid>{B4FC9916-8D92-4B6E-8F70-155B8B3575EB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OBone.Core</RootNamespace>
-    <AssemblyName>OBone.Core</AssemblyName>
+    <RootNamespace>OBone.Application</RootNamespace>
+    <AssemblyName>OBone.Application</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,7 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,16 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\IRepository.cs" />
-    <Compile Include="Data\IUnitOfWork.cs" />
-    <Compile Include="EntityBase.cs" />
-    <Compile Include="IDependency.cs" />
-    <Compile Include="Models\Building.cs" />
-    <Compile Include="Models\Community.cs" />
+    <Compile Include="EntityServices\CommunityService.cs" />
+    <Compile Include="IEnitityContracts\ICommunityContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceBase.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\OBone.Core\OBone.Core.csproj">
+      <Project>{d0b47e3e-da03-405d-b369-151459157693}</Project>
+      <Name>OBone.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

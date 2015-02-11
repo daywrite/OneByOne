@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityRepositories\Repository.cs" />
+    <Compile Include="Extensions\DbContextExtensions.cs" />
     <Compile Include="Migrations\CreateDatabaseIfNotExistsWithSeed.cs" />
     <Compile Include="Migrations\DatabaseInitializer.cs" />
     <Compile Include="Migrations\ISeedAction.cs" />
