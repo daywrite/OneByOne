@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-测试", "5-测试", "{A7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBone.Utility.Tests", "OBone.Utility.Tests\OBone.Utility.Tests.csproj", "{96935D06-5B04-4DAE-B02B-90AD1AAC63EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBone.Redis.Tests", "OBone.Redis.Tests\OBone.Redis.Tests.csproj", "{C16832DB-32AD-4EFE-B99A-14F4EE9E336B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{96935D06-5B04-4DAE-B02B-90AD1AAC63EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96935D06-5B04-4DAE-B02B-90AD1AAC63EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96935D06-5B04-4DAE-B02B-90AD1AAC63EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C16832DB-32AD-4EFE-B99A-14F4EE9E336B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C16832DB-32AD-4EFE-B99A-14F4EE9E336B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C16832DB-32AD-4EFE-B99A-14F4EE9E336B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C16832DB-32AD-4EFE-B99A-14F4EE9E336B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +65,6 @@ Global
 		{43327971-2996-4A4D-A2CC-F491B31F1493} = {1F89658D-36FA-444F-AFCC-FBE7611DE77A}
 		{B4FC9916-8D92-4B6E-8F70-155B8B3575EB} = {182913B6-D217-450B-8A8F-ECE069EBB8C3}
 		{96935D06-5B04-4DAE-B02B-90AD1AAC63EE} = {A7431686-AF05-4682-A230-4D990A5A7CD2}
+		{C16832DB-32AD-4EFE-B99A-14F4EE9E336B} = {A7431686-AF05-4682-A230-4D990A5A7CD2}
 	EndGlobalSection
 EndGlobal
