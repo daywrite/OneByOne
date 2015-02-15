@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
-
+using OBone.Application;
 using OBone.Core.Data.Entity;
 
 namespace OBone.API
@@ -21,7 +21,9 @@ namespace OBone.API
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             
             //数据库生成初始入口           
-            DatabaseInitializer.Initialize();  
+            DatabaseInitializer.Initialize();
+
+            CacheApplication.Init();
         }
     }
 }

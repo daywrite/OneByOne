@@ -39,11 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheApplication.cs" />
     <Compile Include="EntityServices\CommunityService.cs" />
     <Compile Include="IEnitityContracts\ICommunityContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OBone.Application.Caching\OBone.Application.Caching.csproj">
+      <Project>{facabd92-21ce-46fd-8c49-c35dc9e330a8}</Project>
+      <Name>OBone.Application.Caching</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OBone.Core\OBone.Core.csproj">
       <Project>{d0b47e3e-da03-405d-b369-151459157693}</Project>
       <Name>OBone.Core</Name>
