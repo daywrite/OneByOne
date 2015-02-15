@@ -12,7 +12,15 @@ namespace OBone.Redis.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            //var client=new Client.
+            var client = RedisSingleton.GetInstance.Client = new Client.RedisClient();
+            client.Connect("127.0.0.1",6379);
+
+            string key = "test";
+            string value = "OBone.Redis";
+
+            client.Set(key, value);
+
+            Assert.AreEqual(value, client.Get(key));
         }
     }
 }

@@ -53,6 +53,12 @@
     <Compile Include="RedisTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OBone.Redis\OBone.Redis.csproj">
+      <Project>{b32d5477-3f86-4657-995b-aed87f13e331}</Project>
+      <Name>OBone.Redis</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
