@@ -21,9 +21,9 @@ namespace OBone.API.Controllers
 
         [HttpGet]
         [Route("Query/All")]
-        public IQueryable<Community> Get()
+        public async System.Threading.Tasks.Task<Community> Get()
         {
-            return _communityContract.Communities;
+            return await _communityContract.GetByKeyAsync(1);
         }
     }
 }

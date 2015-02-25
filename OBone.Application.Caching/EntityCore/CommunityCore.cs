@@ -22,17 +22,26 @@ namespace OBone.Application.Caching
         {
             _communityRepository = communityRepository;
         }
-      
+
+        private Community GetCommunityCacheByCommunityName(string communityName)
+        {
+            return RedisSingleton.GetInstance.Client.HGet<Community>("Community", "CommunityName:" + communityName);
+        }
+
         /// <summary>
         /// 获取 
         /// </summary>
         public IQueryable<Community> Communities
         {
-            get { return _communityRepository.Entities; }
+            get
+            {
+                return _communityRepository.Entities;
+            }
         }
 
         public async Task<Community> GetByKeyAsync(int id)
         {
+            Community c = GetCommunityCacheByCommunityName("111");
             //id.CheckGreaterThan("id", 0);
             return await _communityRepository.GetByKeyAsync(id);
         }
