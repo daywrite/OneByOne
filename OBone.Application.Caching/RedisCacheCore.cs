@@ -15,6 +15,7 @@ namespace OBone.Application.Caching
 {
     public class RedisCacheCore
     {
+
         public static void Init()
         {
             RedisSingleton.GetInstance.Client = new OBone.Redis.Client.RedisClient();
