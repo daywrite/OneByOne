@@ -44,19 +44,20 @@ namespace OBone.Application.Caching
             //{
             //    lst = await ef.FindAllAsync();
             //}
-
-            var type = typeof(T);
             
-            foreach (var user in lst)
-            {
-                foreach (var propertyName in propertyNames)
-                {
-                    RedisSingleton.GetInstance.Client.HSet(
-                        type.Name,
-                        string.Format("{0}:{1}", propertyName, type.GetProperty(propertyName).GetValue(user) as string),
-                        JsonHelper.SerializeToJson(user));
-                }
-            }
+            var type = typeof(T);
+
+            RedisSingleton.GetInstance.Client.Set(type.Name, JsonHelper.SerializeToJson(lst));
+            //foreach (var user in lst)
+            //{
+            //    foreach (var propertyName in propertyNames)
+            //    {
+            //        RedisSingleton.GetInstance.Client.HSet(
+            //            type.Name,
+            //            string.Format("{0}:{1}", propertyName, type.GetProperty(propertyName).GetValue(user) as string),
+            //            JsonHelper.SerializeToJson(user));
+            //    }
+            //}
         }
     }
 }

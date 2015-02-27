@@ -23,9 +23,9 @@ namespace OBone.Application.Caching
             _communityRepository = communityRepository;
         }
 
-        private Community GetCommunityCacheByCommunityName(string communityName)
+        private List<Community> GetCommunityCacheByCommunityName(string communityName)
         {
-            return RedisSingleton.GetInstance.Client.HGet<Community>("Community", "CommunityName:" + communityName);
+            return JsonHelper.DeserializeFromJson<List<Community>>(RedisSingleton.GetInstance.Client.Get("Community"));
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace OBone.Application.Caching
 
         public async Task<Community> GetByKeyAsync(int id)
         {
-            Community c = GetCommunityCacheByCommunityName("111");
+            List<Community> c = GetCommunityCacheByCommunityName("111");
             //id.CheckGreaterThan("id", 0);
             return await _communityRepository.GetByKeyAsync(id);
         }
