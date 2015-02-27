@@ -11,27 +11,32 @@ using OBone.Core.Models;
 using OBone.Redis;
 using OBone.Utility.Data;
 
+using System.Data.Entity;
 namespace OBone.Application.Caching
 {
-    public class RedisCacheCore
+    public class RedisCacheCore<TEntity, TKey> where TEntity : EntityBase<TKey>
     {
+        OBoneDbContext context = new OBoneDbContext();
 
-        public static void Init()
+        public  void Init()
         {
             RedisSingleton.GetInstance.Client = new OBone.Redis.Client.RedisClient();
             //todo 读取配置连接Redis
             RedisSingleton.GetInstance.Client.Connect("127.0.0.1", 6379);
 
+            var type = typeof(TEntity);
+            List<TEntity> Entities = context.Set<TEntity>().ToList();
+            RedisSingleton.GetInstance.Client.Set(type.Name, JsonHelper.ToJson(Entities));
             //todo 读取数据库加载Redis缓存监视器
-            var monitor = new RedisCacheMonitor() { TableName = "Communities", Fields = new string[] { "Id", "CommunityName" } };
+            //var monstaticitor = new RedisCacheMonitor() { TableName = "Communities", Fields = new string[] { "Id", "CommunityName" } };
 
-            MonitorWrapper.Init(monitor);
+            //MonitorWrapper.Init(monitor);
 
             //todo 启动时自动加载所有缓存
-            LoadUserCache<OBone.Core.Models.Community>(monitor.Fields);
+            //LoadUserCache<OBone.Core.Models.Community>(monitor.Fields);
         }
 
-        public static async void LoadUserCache<T>(params string[] propertyNames) where T : class,new()
+        public async void LoadUserCache<T>(params string[] propertyNames) where T : class,new()
         {
             //List<T> lst = null;
             var lst = new List<Community>() { 
@@ -40,11 +45,12 @@ namespace OBone.Application.Caching
             new Community(){Id=3,CommunityName="333", IsDeleted=false, CreatedTime=DateTime.Now},
             new Community(){Id=4,CommunityName="444", IsDeleted=false, CreatedTime=DateTime.Now}
             };
+            context.Set<TEntity>();
             //using (var ef = new DataWrapper<T>())
             //{
             //    lst = await ef.FindAllAsync();
             //}
-            
+
             var type = typeof(T);
 
             RedisSingleton.GetInstance.Client.Set(type.Name, JsonHelper.SerializeToJson(lst));

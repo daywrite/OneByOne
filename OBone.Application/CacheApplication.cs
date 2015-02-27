@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OBone.Application.Caching;
+using OBone.Core.Models;
 
 namespace OBone.Application
 {
@@ -11,7 +12,7 @@ namespace OBone.Application
     {
         public static void Init()
         {
-            RedisCacheCore.Init();
+            new RedisCacheCore<Community,int>().Init();
         }
     }
 }

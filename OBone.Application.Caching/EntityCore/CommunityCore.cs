@@ -25,7 +25,7 @@ namespace OBone.Application.Caching
 
         private List<Community> GetCommunityCacheByCommunityName(string communityName)
         {
-            return JsonHelper.DeserializeFromJson<List<Community>>(RedisSingleton.GetInstance.Client.Get("Community"));
+            return JsonHelper.FromJson<List<Community>>(RedisSingleton.GetInstance.Client.Get("Community"));
         }
 
         /// <summary>
