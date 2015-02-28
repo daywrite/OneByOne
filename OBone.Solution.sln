@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBone.Caching", "OBone.Cach
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBone.Application.Caching", "OBone.Application.Caching\OBone.Application.Caching.csproj", "{FACABD92-21CE-46FD-8C49-C35DC9E330A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBone.Redis.ServiceStack.Tests", "OBone.Redis.ServiceStack.Tests\OBone.Redis.ServiceStack.Tests.csproj", "{6C833629-2E27-4FD2-9D5C-A45FC5AEE8F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{FACABD92-21CE-46FD-8C49-C35DC9E330A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FACABD92-21CE-46FD-8C49-C35DC9E330A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FACABD92-21CE-46FD-8C49-C35DC9E330A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C833629-2E27-4FD2-9D5C-A45FC5AEE8F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C833629-2E27-4FD2-9D5C-A45FC5AEE8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C833629-2E27-4FD2-9D5C-A45FC5AEE8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C833629-2E27-4FD2-9D5C-A45FC5AEE8F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,5 +100,6 @@ Global
 		{8F9A5E89-2AE2-4CD6-9005-77F6AEF8212E} = {63ADB756-1837-474C-AA5A-03241B762E50}
 		{96935D06-5B04-4DAE-B02B-90AD1AAC63EE} = {A7431686-AF05-4682-A230-4D990A5A7CD2}
 		{C16832DB-32AD-4EFE-B99A-14F4EE9E336B} = {A7431686-AF05-4682-A230-4D990A5A7CD2}
+		{6C833629-2E27-4FD2-9D5C-A45FC5AEE8F7} = {A7431686-AF05-4682-A230-4D990A5A7CD2}
 	EndGlobalSection
 EndGlobal
