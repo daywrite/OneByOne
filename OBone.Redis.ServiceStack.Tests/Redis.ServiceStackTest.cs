@@ -15,11 +15,13 @@ namespace OBone.Redis.ServiceStack.Tests
         OBoneDbContext context = new OBoneDbContext();
 
         public RedisClient Client = null;
-
+        public PooledRedisClientManager prcm = null;
         public ServiceStackTest()
         {
-            Client = new RedisClient("127.0.0.1", 6379);
-            
+            //Client = new RedisClient("127.0.0.1", 6379);
+            //Client.FlushAll();
+
+            prcm = CreateManager(new string[] { "127.0.0.1:6379" }, new string[] { "127.0.0.1:6379" });
         }
 
         [TestMethod]
@@ -36,17 +38,22 @@ namespace OBone.Redis.ServiceStack.Tests
         [TestMethod]
         public void TestList()
         {
-            Client.FlushAll();
-
             //var rCommunities = Client.As<Community>();
 
             List<Community> Entities = context.Set<Community>().ToList();
-            Task.Run(() => {
-                RedisClient _Client = new RedisClient("127.0.0.1", 6379);
-                var rCommunities = _Client.As<Community>();
+            //Task.Run(() =>
+            //{
                 List<Community> Entities10 = Entities.Take(1000).ToList();
-                rCommunities.StoreAll(Entities10);
-            });
+                prcm = CreateManager(new string[] { "127.0.0.1:6379" }, new string[] { "127.0.0.1:6379" });
+                using (IRedisClient Redis = prcm.GetClient())
+                {
+                    Redis.Set("Community", Entities10);
+
+                    int a = 1;
+
+                    //List<Community> _Entities10 = Redis.Get<List<Community>>("userinfolist");
+                }
+            //});
             //Task.Run(() =>
             //{
             //    List<Community> Entities20 = Entities.Skip(1000).Take(1000).ToList();
