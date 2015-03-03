@@ -10,6 +10,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
+using OBone.Core.Logging;
 
 namespace OBone.Core.Data.Entity
 {
@@ -51,7 +52,7 @@ namespace OBone.Core.Data.Entity
             {
                 Configuration.ValidateOnSaveEnabled = validateOnSaveEnabled;
                 //记录实体操作日志
-                //List<OperatingLog> logs = (await this.GetEntityOperateLogsAsync()).ToList();
+                List<OperatingLog> logs = (await this.GetEntityOperateLogsAsync()).ToList();
                 int count = await base.SaveChangesAsync();
                 if (count > 0)
                 {

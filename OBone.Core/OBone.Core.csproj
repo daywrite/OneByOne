@@ -40,16 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\Operator.cs" />
+    <Compile Include="Context\OSharpContext.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="IDependency.cs" />
+    <Compile Include="Logging\OperatingLog.cs" />
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\Community.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceBase.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\OBone.Utility\OBone.Utility.csproj">
+      <Project>{57866b33-d050-4562-84ad-472824c8eac6}</Project>
+      <Name>OBone.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

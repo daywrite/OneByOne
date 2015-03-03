@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using OBone.Core.Logging;
 namespace OBone.Core.Data.Entity
 {
     public static class DbContextExtensions
@@ -87,6 +88,137 @@ namespace OBone.Core.Data.Entity
                     }
                 }
             }
+        }
+
+
+        /// <summary>
+        /// 获取数据上下文的变更日志信息
+        /// </summary>
+        public static IEnumerable<OperatingLog> GetEntityOperateLogs(this DbContext dbContext)
+        {
+            string[] nonLoggingTypeNames = { };
+
+            ObjectContext objectContext = ((IObjectContextAdapter)dbContext).ObjectContext;
+            ObjectStateManager manager = objectContext.ObjectStateManager;
+
+            IEnumerable<ObjectStateEntry> entries = manager.GetObjectStateEntries(EntityState.Added)
+                .Where(entry => entry.Entity != null && !nonLoggingTypeNames.Contains(entry.Entity.GetType().FullName));
+            IEnumerable<OperatingLog> logs = entries.Select(GetAddedLog);
+
+            entries = manager.GetObjectStateEntries(EntityState.Modified)
+                .Where(entry => entry.Entity != null && !nonLoggingTypeNames.Contains(entry.Entity.GetType().FullName));
+            logs = logs.Union(entries.Select(GetModifiedLog));
+
+            entries = manager.GetObjectStateEntries(EntityState.Deleted)
+                .Where(entry => entry.Entity != null && !nonLoggingTypeNames.Contains(entry.Entity.GetType().FullName));
+            logs = logs.Union(entries.Select(GetDeletedLog));
+            return logs;
+        }
+
+        /// <summary>
+        /// 异步获取数据上下文的变更日志信息
+        /// </summary>
+        /// <param name="dbContext"></param>
+        /// <returns></returns>
+        public static async Task<IEnumerable<OperatingLog>> GetEntityOperateLogsAsync(this DbContext dbContext)
+        {
+            return await Task.Run(() => dbContext.GetEntityOperateLogs());
+        }
+
+        /// <summary>
+        /// 获取添加数据的日志信息
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <returns></returns>
+        private static OperatingLog GetAddedLog(ObjectStateEntry entry)
+        {
+            OperatingLog log = new OperatingLog
+            {
+                EntityName = entry.EntitySet.ElementType.Name,
+                OperateType = OperatingType.Insert
+            };
+            for (int i = 0; i < entry.CurrentValues.FieldCount; i++)
+            {
+                string name = entry.CurrentValues.GetName(i);
+                if (name == "Timestamp")
+                {
+                    continue;
+                }
+                object value = entry.CurrentValues.GetValue(i);
+                OperatingLogItem logItem = new OperatingLogItem()
+                {
+                    Field = name,
+                    NewValue = value == null ? null : value.ToString()
+                };
+                log.LogItems.Add(logItem);
+            }
+            return log;
+        }
+
+        /// <summary>
+        /// 获取修改数据的日志信息
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <returns></returns>
+        private static OperatingLog GetModifiedLog(ObjectStateEntry entry)
+        {
+            OperatingLog log = new OperatingLog()
+            {
+                EntityName = entry.EntitySet.ElementType.Name,
+                OperateType = OperatingType.Update
+            };
+            for (int i = 0; i < entry.CurrentValues.FieldCount; i++)
+            {
+                string name = entry.CurrentValues.GetName(i);
+                if (name == "Timestamp")
+                {
+                    continue;
+                }
+                object currentValue = entry.CurrentValues.GetValue(i);
+                object originalValue = entry.OriginalValues[name];
+                if (currentValue.Equals(originalValue))
+                {
+                    continue;
+                }
+                OperatingLogItem logItem = new OperatingLogItem()
+                {
+                    Field = name,
+                    NewValue = currentValue == null ? null : currentValue.ToString(),
+                    OriginalValue = originalValue == null ? null : originalValue.ToString()
+                };
+                log.LogItems.Add(logItem);
+            }
+            return log;
+        }
+
+        /// <summary>
+        /// 获取删除数据的日志信息
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <returns></returns>
+        private static OperatingLog GetDeletedLog(ObjectStateEntry entry)
+        {
+            OperatingLog log = new OperatingLog()
+            {
+                EntityName = entry.EntitySet.ElementType.Name,
+                OperateType = OperatingType.Delete
+            };
+            for (int i = 0; i < entry.OriginalValues.FieldCount; i++)
+            {
+                string name = entry.OriginalValues.GetName(i);
+                if (name == "Timestamp")
+                {
+                    continue;
+                }
+                object originalValue = entry.OriginalValues[i];
+                OperatingLogItem logItem = new OperatingLogItem()
+                {
+                    Field = name,
+                    OriginalValue = originalValue == null ? null : originalValue.ToString()
+                };
+                log.LogItems.Add(logItem);
+            }
+            return log;
         }
     }
 }
