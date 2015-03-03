@@ -46,5 +46,18 @@ namespace OBone.Application.Caching
             return await _communityRepository.GetByKeyAsync(id);
         }
 
+        /// <summary>
+        /// 异步添加示例实体
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public async Task<OperationResult> AddCommunityAsync(Community dto)
+        {
+            //dto.CheckNotNull("dto");
+
+            return (await _communityRepository.InsertAsync(dto)) > 0
+                ? new OperationResult(OperationResultType.Success, "示例实体“{0}”添加成功。")
+                : new OperationResult(OperationResultType.NoChanged);
+        }
     }
 }

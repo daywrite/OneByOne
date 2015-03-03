@@ -14,6 +14,9 @@ using OBone.Core.Data;
 
 using System.IO;
 using System.Web;
+using OBone.API.Logging;
+using OBone.Core.Logging;
+using OBone.Utility.Logging;
 
 namespace OBone.API
 {
@@ -52,6 +55,16 @@ namespace OBone.API
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(builder.Build());
 
             #endregion
+
+            #region 日志
+            LoggingInitialize();
+            #endregion
+        }
+
+        private static void LoggingInitialize()
+        {
+            Log4NetLoggerAdapter adapter = new Log4NetLoggerAdapter();
+            LogManager.AddLoggerAdapter(adapter);
         }
     }
 }

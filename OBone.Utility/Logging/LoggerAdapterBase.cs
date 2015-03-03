@@ -8,25 +8,24 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using OBone.Core.Properties;
-using OBone.Utility;
 using OBone.Utility.Extensions;
+using OBone.Utility.Properties;
 
 
-namespace OBone.Core.Logging
+namespace OBone.Utility.Logging
 {
     /// <summary>
     /// 按名称缓存的日志实现适配器基类，用于创建并管理指定类型的日志实例
     /// </summary>
-    public abstract class CachingLoggerAdapterBase : ILoggerAdapter
+    public abstract class LoggerAdapterBase : ILoggerAdapter
     {
         private readonly ConcurrentDictionary<string, ILog> _cacheLoggers;
 
-        protected CachingLoggerAdapterBase()
+        /// <summary>
+        /// 初始化一个<see cref="LoggerAdapterBase"/>类型的新实例
+        /// </summary>
+        protected LoggerAdapterBase()
         {
             _cacheLoggers = new ConcurrentDictionary<string, ILog>();
         }

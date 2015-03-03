@@ -1,23 +1,25 @@
 ﻿// -----------------------------------------------------------------------
 //  <copyright file="Logger.cs" company="OBone开源团队">
-//      Copyright (c) 2014 OBone. All rights reserved.
+//      Copyright (c) 2014-2015 OBone. All rights reserved.
 //  </copyright>
 //  <last-editor>郭明锋</last-editor>
-//  <last-date>2014-08-12 18:09</last-date>
+//  <last-date>2015-02-07 15:39</last-date>
 // -----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
+
+using OBone.Utility.Extensions;
 
 
-namespace OBone.Core.Logging
+namespace OBone.Utility.Logging
 {
     /// <summary>
-    /// 日志记录者
+    /// 日志记录者，日志记录输入端
     /// </summary>
-    public sealed class Logger : ILogger
+    internal sealed class Logger : ILogger
     {
         internal Logger(Type type)
             : this(type.FullName)
@@ -26,12 +28,18 @@ namespace OBone.Core.Logging
         internal Logger(string name)
         {
             Name = name;
+            EntryLevel = ConfigurationManager.AppSettings.Get("OBone-EntryLogLevel").CastTo(LogLevel.Off);
         }
 
         /// <summary>
         /// 获取 日志记录者名称
         /// </summary>
         public string Name { get; private set; }
+
+        /// <summary>
+        /// 获取或设置 日志级别的入口控制，级别决定是否执行相应级别的日志记录功能
+        /// </summary>
+        public LogLevel EntryLevel { get; set; }
 
         #region Implementation of ILogger
 
@@ -41,6 +49,10 @@ namespace OBone.Core.Logging
         /// <param name="message">日志消息</param>
         public void Trace<T>(T message)
         {
+            if (!IsEnabledFor(LogLevel.Trace))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Trace(message);
@@ -54,6 +66,10 @@ namespace OBone.Core.Logging
         /// <param name="args">格式化参数</param>
         public void Trace(string format, params object[] args)
         {
+            if (!IsEnabledFor(LogLevel.Trace))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Trace(format, args);
@@ -66,6 +82,10 @@ namespace OBone.Core.Logging
         /// <param name="message">日志消息</param>
         public void Debug<T>(T message)
         {
+            if (!IsEnabledFor(LogLevel.Debug))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Debug(message);
@@ -79,6 +99,10 @@ namespace OBone.Core.Logging
         /// <param name="args">格式化参数</param>
         public void Debug(string format, params object[] args)
         {
+            if (!IsEnabledFor(LogLevel.Debug))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Debug(format, args);
@@ -91,6 +115,10 @@ namespace OBone.Core.Logging
         /// <param name="message">日志消息</param>
         public void Info<T>(T message)
         {
+            if (!IsEnabledFor(LogLevel.Info))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Info(message);
@@ -104,6 +132,10 @@ namespace OBone.Core.Logging
         /// <param name="args">格式化参数</param>
         public void Info(string format, params object[] args)
         {
+            if (!IsEnabledFor(LogLevel.Info))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Info(format, args);
@@ -116,6 +148,10 @@ namespace OBone.Core.Logging
         /// <param name="message">日志消息</param>
         public void Warn<T>(T message)
         {
+            if (!IsEnabledFor(LogLevel.Warn))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Warn(message);
@@ -129,6 +165,10 @@ namespace OBone.Core.Logging
         /// <param name="args">格式化参数</param>
         public void Warn(string format, params object[] args)
         {
+            if (!IsEnabledFor(LogLevel.Warn))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Warn(format, args);
@@ -141,6 +181,10 @@ namespace OBone.Core.Logging
         /// <param name="message">日志消息</param>
         public void Error<T>(T message)
         {
+            if (!IsEnabledFor(LogLevel.Error))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Error(message);
@@ -154,6 +198,10 @@ namespace OBone.Core.Logging
         /// <param name="args">格式化参数</param>
         public void Error(string format, params object[] args)
         {
+            if (!IsEnabledFor(LogLevel.Error))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Error(format, args);
@@ -167,6 +215,10 @@ namespace OBone.Core.Logging
         /// <param name="exception">异常</param>
         public void Error<T>(T message, Exception exception)
         {
+            if (!IsEnabledFor(LogLevel.Error))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Error(message, exception);
@@ -181,6 +233,10 @@ namespace OBone.Core.Logging
         /// <param name="args">格式化参数</param>
         public void Error(string format, Exception exception, params object[] args)
         {
+            if (!IsEnabledFor(LogLevel.Error))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Error(format, exception, args);
@@ -193,6 +249,10 @@ namespace OBone.Core.Logging
         /// <param name="message">日志消息</param>
         public void Fatal<T>(T message)
         {
+            if (!IsEnabledFor(LogLevel.Fatal))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Fatal(message);
@@ -206,6 +266,10 @@ namespace OBone.Core.Logging
         /// <param name="args">格式化参数</param>
         public void Fatal(string format, params object[] args)
         {
+            if (!IsEnabledFor(LogLevel.Fatal))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Fatal(format, args);
@@ -219,6 +283,10 @@ namespace OBone.Core.Logging
         /// <param name="exception">异常</param>
         public void Fatal<T>(T message, Exception exception)
         {
+            if (!IsEnabledFor(LogLevel.Fatal))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Fatal(message, exception);
@@ -233,10 +301,23 @@ namespace OBone.Core.Logging
         /// <param name="args">格式化参数</param>
         public void Fatal(string format, Exception exception, params object[] args)
         {
+            if (!IsEnabledFor(LogLevel.Fatal))
+            {
+                return;
+            }
             foreach (ILog log in LogManager.Adapters.Select(adapter => adapter.GetLogger(Name)))
             {
                 log.Fatal(format, exception, args);
             }
+        }
+
+        #endregion
+
+        #region 私有方法
+
+        private bool IsEnabledFor(LogLevel level)
+        {
+            return level >= EntryLevel;
         }
 
         #endregion

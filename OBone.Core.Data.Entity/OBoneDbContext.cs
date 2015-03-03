@@ -11,8 +11,9 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 
-using OBone.Core.Logging;
+using OBone.Utility.Logging;
 using OBone.Utility.Exceptions;
+using OBone.Core.Logging;
 namespace OBone.Core.Data.Entity
 {
     /// <summary>
@@ -20,7 +21,7 @@ namespace OBone.Core.Data.Entity
     /// </summary>
     public class OBoneDbContext : DbContext, IUnitOfWork, IDependency
     {
-        private static readonly Logger Logger = LogManager.GetLogger(typeof(OBoneDbContext));
+        private static readonly ILogger Logger = LogManager.GetLogger(typeof(OBoneDbContext));
 
         public OBoneDbContext()
             : base(ConfigurationManager.AppSettings["ConnectionStringName"])

@@ -23,7 +23,7 @@ namespace OBone.API
             //数据库生成初始入口           
             DatabaseInitializer.Initialize();
 
-            CacheApplication.Init();
+            //CacheApplication.Init();
         }
     }
 }

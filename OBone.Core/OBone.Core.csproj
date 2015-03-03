@@ -46,14 +46,6 @@
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="IDependency.cs" />
-    <Compile Include="Logging\CachingLoggerAdapterBase.cs" />
-    <Compile Include="Logging\ILog.cs" />
-    <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\ILoggerAdapter.cs" />
-    <Compile Include="Logging\LogBase.cs" />
-    <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Logging\LogLevel.cs" />
-    <Compile Include="Logging\LogManager.cs" />
     <Compile Include="Logging\OperatingLog.cs" />
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\Community.cs" />

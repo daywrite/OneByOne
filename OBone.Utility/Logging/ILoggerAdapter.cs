@@ -7,15 +7,12 @@
 // -----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 
-namespace OBone.Core.Logging
+namespace OBone.Utility.Logging
 {
     /// <summary>
-    /// 定义日志实现适配器的方法
+    /// 定义日志输出适配器的方法
     /// </summary>
     public interface ILoggerAdapter
     {

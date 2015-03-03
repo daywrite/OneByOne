@@ -6,13 +6,7 @@
 //  <last-date>2014-08-10 13:48</last-date>
 // -----------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-
-namespace OBone.Core.Logging
+namespace OBone.Utility.Logging
 {
     /// <summary>
     /// 表示日志输出级别的枚举

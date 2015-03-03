@@ -23,7 +23,12 @@ namespace OBone.API.Controllers
         [Route("Query/All")]
         public async System.Threading.Tasks.Task<Community> Get()
         {
+            Community c = new Community();
+            c.CommunityName = "1223321";
+            await _communityContract.AddCommunityAsync(c);
             return await _communityContract.GetByKeyAsync(1);
         }
+    
+
     }
 }

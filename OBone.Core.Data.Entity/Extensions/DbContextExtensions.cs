@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using OBone.Core.Logging;
+using OBone.Utility.Logging;
 namespace OBone.Core.Data.Entity
 {
     public static class DbContextExtensions

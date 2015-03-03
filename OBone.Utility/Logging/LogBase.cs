@@ -7,76 +7,52 @@
 // -----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 
-namespace OBone.Core.Logging
+namespace OBone.Utility.Logging
 {
     /// <summary>
-    /// 日志实例基类，用于定义日志的处理业务
+    /// 日志输出者适配基类，用于定义日志输出的处理业务
     /// </summary>
     public abstract class LogBase : ILog
     {
-        /// <summary>
-        /// 日志输出处理委托实例
-        /// </summary>
-        // ReSharper disable once InconsistentNaming
-        private readonly WriteHandler Write;
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        protected LogBase()
-        {
-            Write = GetWriteHandler() ?? WriteInternal;
-        }
-
-        /// <summary>
-        /// 获取日志输出处理委托实例
-        /// </summary>
-        /// <returns></returns>
-        protected virtual WriteHandler GetWriteHandler()
-        {
-            return null;
-        }
-
         /// <summary>
         /// 获取日志输出处理委托实例
         /// </summary>
         /// <param name="level">日志输出级别</param>
         /// <param name="message">日志消息</param>
         /// <param name="exception">日志异常</param>
-        protected abstract void WriteInternal(LogLevel level, object message, Exception exception);
+        protected abstract void Write(LogLevel level, object message, Exception exception);
 
         #region Implementation of ILog
 
         /// <summary>
-        /// 获取 是否允许<see cref="LogLevel.Trace"/>级别的日志
+        /// 获取 是否允许输出<see cref="LogLevel.Trace"/>级别的日志
         /// </summary>
         public abstract bool IsTraceEnabled { get; }
 
         /// <summary>
-        /// 获取 是否允许<see cref="LogLevel.Debug"/>级别的日志
+        /// 获取 是否允许输出<see cref="LogLevel.Debug"/>级别的日志
         /// </summary>
         public abstract bool IsDebugEnabled { get; }
 
         /// <summary>
-        /// 获取 是否允许<see cref="LogLevel.Info"/>级别的日志
+        /// 获取 是否允许输出<see cref="LogLevel.Info"/>级别的日志
         /// </summary>
         public abstract bool IsInfoEnabled { get; }
 
         /// <summary>
-        /// 获取 是否允许<see cref="LogLevel.Warn"/>级别的日志
+        /// 获取 是否允许输出<see cref="LogLevel.Warn"/>级别的日志
         /// </summary>
         public abstract bool IsWarnEnabled { get; }
 
         /// <summary>
-        /// 获取 是否允许<see cref="LogLevel.Error"/>级别的日志
+        /// 获取 是否允许输出<see cref="LogLevel.Error"/>级别的日志
         /// </summary>
         public abstract bool IsErrorEnabled { get; }
 
         /// <summary>
-        /// 获取 是否允许<see cref="LogLevel.Fatal"/>级别的日志
+        /// 获取 是否允许输出<see cref="LogLevel.Fatal"/>级别的日志
         /// </summary>
         public abstract bool IsFatalEnabled { get; }
 
@@ -285,13 +261,5 @@ namespace OBone.Core.Logging
         }
 
         #endregion
-
-        /// <summary>
-        /// 日志输出处理委托
-        /// </summary>
-        /// <param name="level">日志输出级别</param>
-        /// <param name="message">日志消息</param>
-        /// <param name="exception">日志异常</param>
-        protected delegate void WriteHandler(LogLevel level, object message, Exception exception);
     }
 }

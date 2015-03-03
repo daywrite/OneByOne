@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
@@ -94,6 +97,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logging\Log4NetLog.cs" />
+    <Compile Include="Logging\Log4NetLoggerAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +122,10 @@
     <ProjectReference Include="..\OBone.Core\OBone.Core.csproj">
       <Project>{d0b47e3e-da03-405d-b369-151459157693}</Project>
       <Name>OBone.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OBone.Utility\OBone.Utility.csproj">
+      <Project>{57866b33-d050-4562-84ad-472824c8eac6}</Project>
+      <Name>OBone.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

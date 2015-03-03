@@ -53,6 +53,10 @@
       <Project>{d0b47e3e-da03-405d-b369-151459157693}</Project>
       <Name>OBone.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OBone.Utility\OBone.Utility.csproj">
+      <Project>{57866b33-d050-4562-84ad-472824c8eac6}</Project>
+      <Name>OBone.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,12 +7,9 @@
 // -----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 
-namespace OBone.Core.Logging
+namespace OBone.Utility.Logging
 {
     /// <summary>
     /// 定义日志记录行为

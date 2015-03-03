@@ -2,25 +2,21 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using OBone.Utility;
-using OBone.Utility.Extensions;
 
 
-namespace OBone.Core.Logging
+namespace OBone.Utility.Logging
 {
     /// <summary>
     /// 日志管理器
     /// </summary>
     public static class LogManager
     {
-        private static readonly ConcurrentDictionary<string, Logger> Loggers;
+        private static readonly ConcurrentDictionary<string, ILogger> Loggers;
         private static readonly object LockObj = new object();
 
         static LogManager()
         {
-            Loggers = new ConcurrentDictionary<string, Logger>();
+            Loggers = new ConcurrentDictionary<string, ILogger>();
             Adapters = new List<ILoggerAdapter>();
         }
 
@@ -62,10 +58,10 @@ namespace OBone.Core.Logging
         /// <summary>
         /// 获取日志记录者实例
         /// </summary>
-        public static Logger GetLogger(string name)
+        public static ILogger GetLogger(string name)
         {
             name.CheckNotNullOrEmpty("name");
-            Logger logger;
+            ILogger logger;
             if (Loggers.TryGetValue(name, out logger))
             {
                 return logger;
@@ -78,7 +74,7 @@ namespace OBone.Core.Logging
         /// <summary>
         /// 获取指定类型的日志记录实例
         /// </summary>
-        public static Logger GetLogger(Type type)
+        public static ILogger GetLogger(Type type)
         {
             type.CheckNotNull("type");
             return GetLogger(type.FullName);
